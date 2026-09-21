@@ -1,826 +1,597 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Para Emily 🌻</title>
+  <title>Para Emily 🌻</title>
 
-<style>
-/* ==============================
-   CONFIGURACIÓN GENERAL
-============================== */
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    min-height: 100%;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Georgia, "Times New Roman", serif;
-    color: #5b3500;
-
-    background:
-        radial-gradient(
-            circle at 50% 20%,
-            #fffde7 0%,
-            #fff3a6 25%,
-            #ffd45c 55%,
-            #e7a51a 80%,
-            #a96800 100%
-        );
-
-    overflow-x: hidden;
-}
-
-
-/* ==============================
-   FONDO
-============================== */
-
-#sky {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.petal {
-    position: absolute;
-    top: -50px;
-    opacity: 0.8;
-
-    animation-name: caer;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-@keyframes caer {
-
-    0% {
-        transform:
-            translateY(-50px)
-            rotate(0deg);
-        opacity: 0;
+  <style>
+    * {
+      box-sizing: border-box;
     }
 
-    10% {
-        opacity: 0.9;
+    html {
+      scroll-behavior: smooth;
     }
 
-    100% {
-        transform:
-            translateY(110vh)
-            rotate(540deg);
-        opacity: 0;
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top, #fff8c9 0%, #ffe58a 35%, #f8c94b 100%);
+      color: #5a3b00;
+      overflow-x: hidden;
     }
-}
-
-
-/* ==============================
-   CONTENEDOR PRINCIPAL
-============================== */
-
-.page {
-    position: relative;
-    z-index: 5;
-
-    width: 100%;
-    min-height: 100vh;
-
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-
-    padding: 40px 20px 60px;
-}
-
-
-/* ==============================
-   TARJETA
-============================== */
-
-.card {
-    width: min(900px, 100%);
-
-    background: rgba(255, 252, 225, 0.94);
-
-    border: 1px solid rgba(255, 255, 255, 0.8);
-
-    border-radius: 30px;
-
-    padding: 45px 55px;
-
-    box-shadow:
-        0 20px 60px rgba(91, 53, 0, 0.25);
-
-    backdrop-filter: blur(8px);
-
-    text-align: center;
-}
-
-
-/* ==============================
-   FLORES
-============================== */
-
-.flowers {
-    font-size: clamp(45px, 7vw, 75px);
-
-    letter-spacing: -8px;
-
-    margin-bottom: 15px;
-
-    animation:
-        moverFlores 2.5s ease-in-out infinite alternate;
-}
-
-@keyframes moverFlores {
-
-    from {
-        transform: scale(1);
-    }
-
-    to {
-        transform: scale(1.06);
-    }
-}
-
-
-/* ==============================
-   TEXTOS
-============================== */
-
-.small {
-    font-size: clamp(13px, 2vw, 18px);
-
-    letter-spacing: 2px;
-
-    margin-bottom: 8px;
-}
-
-.title {
-    margin: 5px 0 15px;
-
-    font-size: clamp(48px, 9vw, 85px);
-
-    color: #9b5b00;
-
-    text-shadow:
-        2px 3px 0 #fff0a3;
-}
-
-.subtitle {
-    max-width: 700px;
-
-    margin: 0 auto 25px;
-
-    font-size: clamp(18px, 2.5vw, 24px);
-
-    line-height: 1.6;
-}
-
-
-/* ==============================
-   CARTA
-============================== */
-
-.letter-container {
-
-    width: 100%;
-
-    max-width: 760px;
-
-    margin: 20px auto;
-
-    padding: 10px;
-}
-
-#letter {
-
-    font-size: clamp(17px, 2vw, 21px);
-
-    line-height: 1.8;
-
-    text-align: left;
-
-    white-space: pre-wrap;
-
-    overflow-wrap: break-word;
-
-    word-break: normal;
-}
-
-
-/* ==============================
-   FIRMA
-============================== */
-
-.signature {
-
-    margin-top: 25px;
-
-    font-size: clamp(20px, 3vw, 27px);
-
-    line-height: 1.5;
-
-    font-style: italic;
-
-    color: #875000;
-}
-
-
-/* ==============================
-   BOTONES
-============================== */
-
-.buttons {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 10px;
-
-    margin-top: 25px;
-}
-
-button {
-
-    border: none;
-
-    border-radius: 50px;
-
-    padding: 14px 24px;
-
-    min-height: 48px;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    background: #e5a900;
-
-    color: white;
-
-    box-shadow:
-        0 8px 18px rgba(116, 72, 0, 0.25);
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-button:hover {
-
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 12px 25px rgba(116, 72, 0, 0.3);
-}
-
-button:active {
-
-    transform: translateY(0);
-}
-
-
-/* ==============================
-   MÚSICA
-============================== */
-
-.music {
-
-    margin-top: 18px;
-
-    font-size: 13px;
-
-    opacity: 0.65;
-}
-
-
-/* ==============================
-   OCULTAR ELEMENTOS
-============================== */
-
-.hidden {
-    display: none;
-}
-
-
-/* ==============================
-   CONFETI
-============================== */
-
-.confetti {
-
-    position: fixed;
-
-    z-index: 20;
-
-    top: 50%;
-    left: 50%;
-
-    font-size: 25px;
-
-    pointer-events: none;
-
-    animation:
-        explosion 1.8s ease-out forwards;
-}
-
-@keyframes explosion {
-
-    0% {
-
-        transform:
-            translate(0, 0)
-            rotate(0deg);
-
-        opacity: 1;
-    }
-
-    100% {
-
-        transform:
-            translate(
-                calc(var(--x) * 1px),
-                calc(var(--y) * 1px)
-            )
-            rotate(720deg);
-
-        opacity: 0;
-    }
-}
-
-
-/* ==============================
-   PC
-============================== */
-
-@media (min-width: 900px) {
 
     .page {
-        padding-top: 60px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 35px 20px 60px;
     }
 
     .card {
-        padding: 50px 70px;
+      width: min(900px, 100%);
+      background: rgba(255, 255, 255, 0.94);
+      border-radius: 28px;
+      padding: 45px;
+      box-shadow:
+        0 20px 60px rgba(120, 75, 0, 0.25),
+        0 5px 15px rgba(120, 75, 0, 0.15);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-}
-
-
-/* ==============================
-   TABLET
-============================== */
-
-@media (max-width: 899px) {
-
-    .card {
-        padding: 40px 35px;
+    .sunflower {
+      font-size: 80px;
+      animation: floatFlower 3s ease-in-out infinite;
+      margin-bottom: 10px;
     }
 
-}
+    @keyframes floatFlower {
+      0%, 100% {
+        transform: translateY(0) rotate(-3deg);
+      }
 
-
-/* ==============================
-   CELULAR
-============================== */
-
-@media (max-width: 600px) {
-
-    .page {
-
-        padding:
-            20px 12px 40px;
+      50% {
+        transform: translateY(-12px) rotate(3deg);
+      }
     }
 
-    .card {
-
-        border-radius: 22px;
-
-        padding:
-            30px 20px;
+    h1 {
+      margin: 5px 0;
+      font-size: clamp(38px, 7vw, 70px);
+      color: #d28a00;
+      letter-spacing: 2px;
     }
 
-    .flowers {
-
-        letter-spacing: -5px;
+    .subtitle {
+      font-size: clamp(16px, 2.5vw, 22px);
+      margin: 15px auto 30px;
+      line-height: 1.6;
+      max-width: 700px;
     }
 
-    #letter {
-
-        font-size: 17px;
-
-        line-height: 1.7;
-    }
-
-    .buttons {
-
-        flex-direction: column;
-
-        width: 100%;
+    .opening {
+      margin-top: 15px;
     }
 
     button {
-
-        width: 100%;
-
-        max-width: 320px;
+      border: none;
+      border-radius: 50px;
+      padding: 15px 28px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ffd83d, #f3a900);
+      color: #5a3900;
+      box-shadow: 0 8px 18px rgba(210, 140, 0, 0.25);
+      transition: all 0.25s ease;
+      font-family: inherit;
     }
 
-}
+    button:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 25px rgba(210, 140, 0, 0.35);
+    }
 
+    button:active {
+      transform: scale(0.97);
+    }
 
-/* ==============================
-   PANTALLAS PEQUEÑAS
-============================== */
+    #surprise {
+      display: none;
+      margin-top: 35px;
+      animation: appear 1s ease forwards;
+    }
 
-@media (max-width: 380px) {
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
 
-    .card {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        padding:
-            25px 16px;
+    .divider {
+      width: 100px;
+      height: 4px;
+      border-radius: 10px;
+      background: #f2b600;
+      margin: 25px auto;
+    }
+
+    .letter-box {
+      width: 100%;
+      text-align: left;
+      background: #fffdf4;
+      border: 2px solid #f5d36b;
+      border-radius: 20px;
+      padding: clamp(22px, 4vw, 40px);
+      box-shadow: inset 0 0 25px rgba(231, 177, 35, 0.08);
     }
 
     #letter {
-
-        font-size: 16px;
-
-        line-height: 1.65;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+      word-break: normal;
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.9;
+      color: #553900;
+      min-height: 50px;
     }
 
-}
-
-
-/* ==============================
-   REDUCIR ANIMACIONES
-============================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .petal,
-    .flowers,
-    .confetti {
-
-        animation: none !important;
+    .signature {
+      margin-top: 25px;
+      text-align: right;
+      font-size: clamp(19px, 2.5vw, 24px);
+      font-style: italic;
+      color: #b87b00;
     }
-}
 
-</style>
+    .music-box {
+      margin: 30px auto 20px;
+      padding: 18px;
+      max-width: 650px;
+      border-radius: 18px;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 222, 85, 0.35),
+        rgba(255, 244, 190, 0.6)
+      );
+      border: 1px solid #f1cf63;
+    }
+
+    .music-title {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .music-subtitle {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .music-status {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #a46c00;
+    }
+
+    .actions {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .secondary {
+      background: white;
+      border: 2px solid #e6b72f;
+    }
+
+    .hidden-player {
+      position: fixed;
+      width: 1px;
+      height: 1px;
+      left: -10px;
+      bottom: -10px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .petal {
+      position: fixed;
+      top: -50px;
+      z-index: 999;
+      pointer-events: none;
+      animation: fall linear forwards;
+      font-size: 20px;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .small-note {
+      margin-top: 25px;
+      font-size: 13px;
+      color: #8b650f;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        padding: 15px 10px 40px;
+      }
+
+      .card {
+        padding: 28px 18px 35px;
+        border-radius: 22px;
+      }
+
+      .sunflower {
+        font-size: 65px;
+      }
+
+      .letter-box {
+        padding: 20px 18px;
+      }
+
+      #letter {
+        font-size: 17px;
+        line-height: 1.75;
+      }
+
+      button {
+        width: 100%;
+        max-width: 320px;
+      }
+
+      .actions {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
-<!-- ==============================
-     FONDO DE PÉTALOS
-============================== -->
+  <!-- REPRODUCTOR DE YOUTUBE OCULTO -->
+  <div class="hidden-player">
+    <div id="youtube-player"></div>
+  </div>
 
-<div id="sky"></div>
+  <main class="page">
 
+    <section class="card">
 
-<div class="page">
+      <!-- PANTALLA INICIAL -->
+      <div class="opening" id="opening">
 
-    <!-- ==============================
-         PANTALLA INICIAL
-    ============================== -->
+        <div class="sunflower">🌻</div>
 
-    <section class="card" id="intro">
-
-        <div class="flowers">
-            🌻🌻🌻
-        </div>
-
-        <div class="small">
-            UNA PEQUEÑA SORPRESA PARA TI
-        </div>
-
-        <h1 class="title">
-            Emily
-        </h1>
+        <h1>Emily</h1>
 
         <p class="subtitle">
-            Hay flores que se regalan…
-            y hay personas que hacen que todo florezca. 💛
+          UNA PEQUEÑA SORPRESA PARA TI 💛
         </p>
 
-        <div class="buttons">
+        <p class="subtitle">
+          Hay flores que se regalan…
+          y hay personas que hacen que todo florezca. 🌻
+        </p>
 
-            <button
-                type="button"
-                id="openButton">
-                Abrir mi sorpresa 🌻
-            </button>
+        <button onclick="openSurprise()">
+          Abrir mi sorpresa 🌻
+        </button>
 
-        </div>
-
-        <div class="music">
-            ♪ Until I Found You — Stephen Sanchez
-        </div>
-
-    </section>
+      </div>
 
 
-    <!-- ==============================
-         CARTA
-    ============================== -->
+      <!-- CONTENIDO DE LA SORPRESA -->
+      <div id="surprise">
 
-    <section
-        class="card hidden"
-        id="letterCard">
+        <div class="sunflower">🌻</div>
 
-        <div class="flowers">
-            🌻✨🌻
-        </div>
+        <h1>Para ti, Emily</h1>
 
-        <div class="letter-container">
+        <div class="divider"></div>
 
-            <div
-                id="letter"
-                aria-live="polite">
-            </div>
+        <!-- CARTA -->
+        <div class="letter-box">
 
-        </div>
+          <div id="letter"></div>
 
-
-        <div class="signature">
-
+          <div class="signature">
             Con cariño,<br>
-
-            <strong>
-                Tu amor por Siempre
-            </strong>
-
-            💛
+            Frank 💛
+          </div>
 
         </div>
 
 
-        <div class="buttons">
+        <!-- MÚSICA -->
+        <div class="music-box">
 
-            <button
-                type="button"
-                id="celebrateButton">
+          <div class="music-title">
+            🎵 Una canción para acompañar este momento
+          </div>
 
-                Un último detalle 🌻
+          <div class="music-subtitle">
+            Until I Found You — Stephen Sanchez
+          </div>
 
-            </button>
+          <div class="music-status" id="musicStatus">
+            🎶 La música comenzará con la sorpresa...
+          </div>
+
+        </div>
+
+
+        <!-- BOTONES -->
+        <div class="actions">
+
+          <button onclick="finalDetail()">
+            Un último detalle 🌻
+          </button>
+
+          <button class="secondary" onclick="shareWhatsApp()">
+            Compartir por WhatsApp 💬
+          </button>
 
         </div>
 
-
-        <div class="music">
-
-            ♪ Until I Found You — Stephen Sanchez
-
+        <div class="small-note">
+          Hecho especialmente para ti 💛
         </div>
+
+      </div>
 
     </section>
 
-</div>
+  </main>
 
 
-<script>
+  <!-- YOUTUBE API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
 
-/* ==============================
-   CREAR PÉTALOS
-============================== */
+  <script>
 
-const sky = document.getElementById("sky");
+    /* =========================================================
+       CONFIGURACIÓN DE LA CARTA
+       ========================================================= */
 
-function crearPetalos() {
+    const letterText = `Emily,
 
-    const cantidad = 35;
+Hoy quería regalarte flores amarillas, pero pensé que unas flores que duran un instante no eran suficientes para decirte lo que quería.
 
-    for (let i = 0; i < cantidad; i++) {
+Así que preparé este pequeño rincón para ti. 🌻
+
+Que estas flores te recuerden que hay personas capaces de iluminar un día simplemente con una sonrisa, y tú eres una de esas personas.
+
+Espero que hoy recibas muchos motivos para sonreír, que tus días estén llenos de momentos bonitos y que nunca te falten razones para sentirte especial.
+
+Y si estas flores lograron sacarte aunque sea una pequeña sonrisa… entonces ya valió la pena preparar esta sorpresa. 💛
+
+Feliz día de las flores amarillas, Emily. 🌻✨`;
+
+
+    /* =========================================================
+       CONFIGURACIÓN DE YOUTUBE
+       VIDEO OFICIAL:
+       Stephen Sanchez - Until I Found You
+       ========================================================= */
+
+    let player;
+
+    function onYouTubeIframeAPIReady() {
+
+      player = new YT.Player('youtube-player', {
+
+        height: '1',
+        width: '1',
+
+        videoId: 'GxldQ9eX2wo',
+
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          rel: 0,
+          modestbranding: 1,
+          playsinline: 1
+        },
+
+        events: {
+          onReady: function () {
+            console.log("Reproductor listo");
+          },
+
+          onStateChange: function (event) {
+
+            if (event.data === YT.PlayerState.PLAYING) {
+
+              document.getElementById("musicStatus").textContent =
+                "🎵 Reproduciendo: Until I Found You — Stephen Sanchez";
+
+            }
+
+          }
+
+        }
+
+      });
+
+    }
+
+
+    /* =========================================================
+       ABRIR SORPRESA
+       ========================================================= */
+
+    function openSurprise() {
+
+      const opening = document.getElementById("opening");
+      const surprise = document.getElementById("surprise");
+
+      opening.style.display = "none";
+      surprise.style.display = "block";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+      /* INICIAR MÚSICA */
+
+      if (player && typeof player.playVideo === "function") {
+
+        player.unMute();
+        player.setVolume(70);
+        player.playVideo();
+
+      }
+
+      /* EFECTOS */
+
+      createPetals();
+
+      setTimeout(function () {
+        typeLetter();
+      }, 500);
+
+    }
+
+
+    /* =========================================================
+       EFECTO DE ESCRITURA
+       ========================================================= */
+
+    function typeLetter() {
+
+      const letter = document.getElementById("letter");
+
+      letter.textContent = "";
+
+      let index = 0;
+
+      function write() {
+
+        if (index < letterText.length) {
+
+          letter.textContent += letterText.charAt(index);
+
+          index++;
+
+          setTimeout(write, 18);
+
+        }
+
+      }
+
+      write();
+
+    }
+
+
+    /* =========================================================
+       FLORES / PÉTALOS CAYENDO
+       ========================================================= */
+
+    function createPetals() {
+
+      const symbols = ["🌻", "💛", "🌼", "✨"];
+
+      let count = 0;
+
+      const interval = setInterval(function () {
 
         const petal = document.createElement("div");
 
         petal.className = "petal";
 
         petal.textContent =
-            Math.random() > 0.5
-                ? "🌻"
-                : "💛";
+          symbols[Math.floor(Math.random() * symbols.length)];
 
         petal.style.left =
-            Math.random() * 100 + "vw";
-
-        petal.style.animationDuration =
-            (6 + Math.random() * 8) + "s";
-
-        petal.style.animationDelay =
-            (-Math.random() * 12) + "s";
+          Math.random() * 100 + "vw";
 
         petal.style.fontSize =
-            (14 + Math.random() * 22) + "px";
+          (15 + Math.random() * 20) + "px";
 
-        sky.appendChild(petal);
-    }
-}
+        petal.style.animationDuration =
+          (4 + Math.random() * 5) + "s";
 
-crearPetalos();
+        document.body.appendChild(petal);
 
+        setTimeout(function () {
+          petal.remove();
+        }, 9000);
 
-/* ==============================
-   MENSAJE
-============================== */
+        count++;
 
-const mensaje = `Emily amor de mi vida,
-
-Hoy quería regalarte flores amarillas, pero pensé que unas flores que duran un instante no eran suficientes para decirte lo que quería.
-
-Así que preparé este pequeño rincón para ti. 🌻
-
-Que estas flores te recuerden que hay personas capaces de iluminar un día simplemente con una sonrisa, y tú eres la unica persona en mi vida que lo puede lograr.
-
-Simpre hare todo por verte feliz, que tus días estén llenos de momentos bonitos y que nunca te falten razones para sentirte especial.
-
-Y si estas flores lograron sacarte aunque sea una pequeña sonrisa… entonces ya valió la pena preparar esta sorpresa. 💛
-
-Feliz día de las flores amarillas, Mi Emily amor de mi vida. 🌻✨`;
-
-
-/* ==============================
-   ELEMENTOS
-============================== */
-
-const intro =
-    document.getElementById("intro");
-
-const letterCard =
-    document.getElementById("letterCard");
-
-const letter =
-    document.getElementById("letter");
-
-const openButton =
-    document.getElementById("openButton");
-
-const celebrateButton =
-    document.getElementById("celebrateButton");
-
-const whatsappButton =
-    document.getElementById("whatsappButton");
-
-
-/* ==============================
-   ABRIR CARTA
-============================== */
-
-openButton.addEventListener(
-    "click",
-    function () {
-
-        intro.classList.add("hidden");
-
-        letterCard.classList.remove("hidden");
-
-        letter.textContent = "";
-
-        escribirMensaje();
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-);
-
-
-/* ==============================
-   EFECTO ESCRITURA
-============================== */
-
-function escribirMensaje() {
-
-    let posicion = 0;
-
-    const velocidad = 16;
-
-    function escribir() {
-
-        if (posicion < mensaje.length) {
-
-            letter.textContent +=
-                mensaje.charAt(posicion);
-
-            posicion++;
-
-            setTimeout(
-                escribir,
-                velocidad
-            );
-
+        if (count > 35) {
+          clearInterval(interval);
         }
 
-    }
-
-    escribir();
-}
-
-
-/* ==============================
-   CELEBRACIÓN
-============================== */
-
-celebrateButton.addEventListener(
-    "click",
-    function () {
-
-        for (let i = 0; i < 35; i++) {
-
-            const confetti =
-                document.createElement("div");
-
-            confetti.className =
-                "confetti";
-
-            confetti.textContent =
-                Math.random() > 0.5
-                    ? "🌻"
-                    : "💛";
-
-            const x =
-                Math.random() * 900 - 450;
-
-            const y =
-                Math.random() * 700 - 350;
-
-            confetti.style.setProperty(
-                "--x",
-                x
-            );
-
-            confetti.style.setProperty(
-                "--y",
-                y
-            );
-
-            document.body.appendChild(
-                confetti
-            );
-
-            setTimeout(
-                function () {
-                    confetti.remove();
-                },
-                1900
-            );
-
-        }
+      }, 180);
 
     }
-);
 
 
-/* ==============================
-   WHATSAPP
-============================== */
+    /* =========================================================
+       ÚLTIMO DETALLE
+       ========================================================= */
 
-whatsappButton.addEventListener(
-    "click",
-    function () {
+    function finalDetail() {
 
-        const mensajeWhatsApp =
-`🌻💛 Emily, preparé una pequeña sorpresa especialmente para ti.
+      const message =
+        "Y si todavía no te lo había dicho suficiente... 🌻💛\n\nGracias por ser una persona tan especial.\n\nEspero que estas flores hayan conseguido regalarte una sonrisa.\n\n— Frank";
 
-Espero que estas flores te saquen una sonrisa.
+      alert(message);
 
-— Frank`;
-
-        const url =
-            "https://wa.me/?text=" +
-            encodeURIComponent(
-                mensajeWhatsApp
-            );
-
-        window.open(
-            url,
-            "_blank",
-            "noopener,noreferrer"
-        );
+      createPetals();
 
     }
-);
 
-</script>
+
+    /* =========================================================
+       COMPARTIR POR WHATSAPP
+       ========================================================= */
+
+    function shareWhatsApp() {
+
+      const text =
+        "Emily 🌻💛 Te preparé una pequeña sorpresa. Espero que te guste.";
+
+      const url =
+        "https://wa.me/?text=" +
+        encodeURIComponent(text + "\n\n" + window.location.href);
+
+      window.open(url, "_blank");
+
+    }
+
+  </script>
 
 </body>
 </html>
